@@ -4,24 +4,94 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Пз №2</title>
+
+    <!-- Основні стилі -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
     <link rel="stylesheet" href="style.css">
-    
+
+    <!-- Silktide Cookie Banner -->
     <link rel="stylesheet" id="silktide-consent-manager-css" href="silktide-consent-manager.css">
+    <script src="silktide-consent-manager.js" defer></script>
 
-<script src="cookie-banner.js"></script>
-
-<script>
-  silktideCookieBannerManager.updateCookieBannerConfig({
-    text: {
-      bannerTitle: 'Your privacy matters to us',
-      acceptButtonText: 'Accept custom cookies',
-      rejectButtonText: 'Reject custom cookies',
+    <!-- Конфігурація банера (з безпечним очікуванням завантаження менеджера) -->
+    <script>
+    function waitForManager(callback, timeout = 5000) {
+        const start = Date.now();
+        (function check() {
+            if (window.silktideCookieBannerManager) return callback();
+            if (Date.now() - start > timeout) {
+                console.warn("Silktide Cookie Manager not loaded");
+                return;
+            }
+            setTimeout(check, 50);
+        })();
     }
-  });
-</script>
 
+    waitForManager(function() {
+        silktideCookieBannerManager.updateCookieBannerConfig({
+            background: {
+                showBackground: true
+            },
+            cookieIcon: {
+                position: "bottomLeft"
+            },
+            cookieTypes: [
+                {
+                    id: "necessary",
+                    name: "Necessary",
+                    description: "<p>These cookies are necessary for the website to function properly and cannot be switched off. They help with things like logging in and setting your privacy preferences.</p>",
+                    required: true,
+                    onAccept: function() {
+                        console.log('Necessary cookies accepted');
+                    }
+                },
+                {
+                    id: "analytics",
+                    name: "Analytics",
+                    description: "<p>These cookies help us improve the site by tracking which pages are most popular and how visitors move around the site.</p>",
+                    defaultValue: true,
+                    onAccept: function() {
+                        console.log('Analytics cookies accepted');
+                    },
+                    onReject: function() {
+                        console.log('Analytics cookies rejected');
+                    }
+                },
+                {
+                    id: "advertising",
+                    name: "Advertising",
+                    description: "<p>These cookies provide extra features and personalization to improve your experience. They may be set by us or by partners whose services we use.</p>",
+                    onAccept: function() {
+                        console.log('Advertising cookies accepted');
+                    },
+                    onReject: function() {
+                        console.log('Advertising cookies rejected');
+                    }
+                }
+            ],
+            text: {
+                banner: {
+                    description: "<p>We use cookies on our site to enhance your user experience, provide personalized content, and analyze our traffic. <a href=\"https://your-website.com/cookie-policy\" target=\"_blank\">Cookie Policy.</a></p>",
+                    acceptAllButtonText: "Accept all",
+                    acceptAllButtonAccessibleLabel: "Accept all cookies",
+                    rejectNonEssentialButtonText: "Reject non-essential",
+                    rejectNonEssentialButtonAccessibleLabel: "Reject non-essential",
+                    preferencesButtonText: "Preferences",
+                    preferencesButtonAccessibleLabel: "Toggle preferences"
+                },
+                preferences: {
+                    title: "Customize your cookie preferences",
+                    description: "<p>We respect your right to privacy. You can choose not to allow some types of cookies. Your cookie preferences will apply across our website.</p>",
+                    creditLinkText: "Get this banner for free",
+                    creditLinkAccessibleLabel: "Get this banner for free"
+                }
+            }
+        });
+    });
+    </script>
 </head>
+
+
 <body>
     <header class="header">
         <h1>Epam</h1>
@@ -33,7 +103,7 @@
     </header>
 
     <main>
-        <!-- Секція 1 - Learn-From-Home Services for Enterprises -->
+        <!-- Секція 1 -->
         <section class="learn-from-home">
             <div class="image-container">
                 <img src="image-04.jpg" alt="Learn From Home">
@@ -42,19 +112,17 @@
                 <h2>Learn-From-Home Services for Enterprises</h2>
                 <p>As the travel industry addresses some of the major challenges that emerged as a result
                     of the pandemic, airlines can turn to intelligent automation to improve experiences and
-                    operations.
-                </p>
+                    operations.</p>
                 <button class="read-more">Read More</button>
             </div>
         </section>
 
-        <!-- Секція 2 - Architecting Security into Your Modern Enterprise -->
+        <!-- Секція 2 -->
         <section class="architecture">
             <div class="content">
                 <h2>Architecting Security into Your Modern Enterprise</h2>
                 <p>It’s time to engineer a trusted future through strategically architected cybersecurity.
-                    <a href ="#">Epam</a> website. Thank you.
-                </p>
+                    <a href ="#">Epam</a> website. Thank you.</p>
                 <button class="read-more">Read More</button>
             </div>
             <div class="image-container">
@@ -62,29 +130,19 @@
             </div>
         </section>
 
-        <!-- Секція 3 - Lorem ipsum dolor sit. -->
+        <!-- Секція 3 -->
         <section class="lorem-ipsum">
             <div class="content">
                 <h2>Lorem ipsum dolor sit.</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam assumenda, at cum 
-                    ducimus eveniet, excepturi itaque libero nemo nisi officia, placeat quis repellat
-                    sequi. similique
-                </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam assumenda, at cum 
-                    ducimus eveniet, excepturi itaque libero nemo nisi officia, placeat quis repellat
-                    sequi. similique</p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam assumenda, at cum 
-                    ducimus eveniet, excepturi itaque libero nemo nisi officia, placeat quis repellat
-                    sequi. similique
-                    </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
                 <button class="read-more">Read More</button>
             </div>
             <div class="image-container">
                 <img src="image-02.jpg" alt="Lorem Ipsum">
             </div>
         </section>
-        <!-- Секція 4 - Плани -->
+
+        <!-- Секція 4 -->
         <section class="plans">
             <div class="image-container">
                 <img src="image-03.jpg" alt="Plans">
@@ -94,54 +152,44 @@
                     <h3>Standard Plan</h3>
                     <h5>$25 per month</h5>
                     <p>Lorem ipsum dolor sit amet.</p>
-                    <p>Lorem ipsum</p>
-                    <p>Lorem ipsum dolor.</p>
-                    <p>Lorem ipsum dolor.</p>
-                    <p>Lorem ipsum dolor sit.</p>
-                    <p>Lorem dolor</p>
                     <button class="buy-now">Buy Now</button>
                 </div>
                 <div class="plan advanced">
                     <h3>Advanced Plan</h3>
                     <h5>$40 per month</h5>
                     <p>Lorem ipsum dolor sit amet.</p>
-                    <p>Lorem ipsum</p>
-                    <p>Lorem ipsum dolor.</p>
-                    <p>Lorem ipsum dolor.</p>
-                    <p>Lorem ipsum dolor sit.</p>
-                    <p>Lorem dolor</p>
                     <button class="buy-now">Buy Now</button>
                 </div>
             </div>
         </section>
 
-        <!-- Секція 5 - Форма -->
+        <!-- Секція 5 — Форма -->
         <section class="application-form">
             <form>
                 <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" required>
 
                 <label for="email">Your Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" required>
 
                 <label for="position">Position:</label>
-                <select id="position" name="position" required>
-                    <option value="" disabled selected>Select your position</option>
+                <select id="position" required>
+                    <option disabled selected>Select your position</option>
                     <option value="developer">Frontend Developer</option>
                     <option value="backend-developer">Backend Developer</option>
                     <option value="designer">UI/UX Designer</option>
                 </select>
 
                 <label for="salary">Salary:</label>
-                <select id="salary" name="salary" required>
-                    <option value="" disabled selected>Select your salary range</option>
+                <select id="salary" required>
+                    <option disabled selected>Select your salary range</option>
                     <option value="2000">$2000 - $3000</option>
                     <option value="3000">$3000 - $5000</option>
                     <option value="5000">$5000+</option>
                 </select>
 
                 <label for="message">Additional Message:</label>
-                <textarea id="message" name="message" rows="4"></textarea>
+                <textarea id="message" rows="4"></textarea>
                 <button type="submit" class="submit">Submit</button>
             </form>
         </section>
@@ -150,6 +198,6 @@
     <footer>
         <p>Copyright © 2020 Your Company Name</p>
     </footer>
-</body>
 
+</body>
 </html>
