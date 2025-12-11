@@ -16,6 +16,15 @@
 <body>
     <header class="header">
         <h1>Epam</h1>
+
+        <!-- Кнопка створення cookie (завдання №3) -->
+    <div style="text-align: right; margin-top: 10px; margin-right: 20px;">
+        <button onclick="createCookie()" 
+            style="padding: 8px 16px; border-radius: 6px; border: none; background:#2b8be6; color:white; cursor:pointer;">
+            Створити cookie
+        </button>
+    </div>
+        
         <blockquote>
             <p>"What We Do: We help customers around the world become competitive – and stay competitive.
                 We combine best-in-class software engineering with digital strategy and experience design,
@@ -117,9 +126,17 @@
     </main>
 
     <footer>
-        <p>Copyright © 2020 Your Company Name</p>
+        <p>Copyright © 2025 Your Company Name</p>
     </footer>
+
+    <script>
+function createCookie() {
+    document.cookie = "labCookie=ButtonClick; path=/; max-age=7200";
+    alert("Cookie створено!");
+}
+    </script>
 
 </body>
 </html>
+
 
